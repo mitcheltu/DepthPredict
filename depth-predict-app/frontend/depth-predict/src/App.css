@@ -1,0 +1,153 @@
+/* ------------------------- */
+/* Variables for easy theming */
+/* ------------------------- */
+:root {
+  --primary-bg: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  --panel-bg: rgba(255, 255, 255, 0.6);
+  --panel-shadow: rgba(0, 0, 0, 0.15);
+  --accent-color: #4a90e2;
+  --text-color: #222;
+  --subtext-color: #555;
+  --border-radius: 1rem;
+  --transition-speed: 0.3s;
+  --footer-height: 60px;
+  --max-width: 1280px;
+}
+
+/* ------------------------- */
+/* Global styles             */
+/* ------------------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body, html, #root {
+  height: 100%;
+  width: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--primary-bg);
+  color: var(--text-color);
+}
+
+/* ------------------------- */
+/* App container             */
+/* ------------------------- */
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  padding: 2rem;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  gap: 1rem;
+}
+
+/* ------------------------- */
+/* Header section            */
+/* ------------------------- */
+.Title h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.Description {
+  font-size: 1.2rem;
+  text-align: center;
+  color: var(--subtext-color);
+  margin-bottom: 1.5rem;
+}
+
+/* ------------------------- */
+/* Upload section            */
+/* ------------------------- */
+.UploadDisplay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.Uploader input[type="file"] {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 0.6rem;
+  background: var(--panel-bg);
+  box-shadow: 0 5px 15px var(--panel-shadow);
+  cursor: pointer;
+  font-weight: 600;
+  transition: all var(--transition-speed) ease;
+}
+
+.Uploader input[type="file"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px var(--panel-shadow);
+}
+
+/* ------------------------- */
+/* Images display            */
+/* ------------------------- */
+.ImagesDisplay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex: 1;
+  width: 100%;
+  padding: 1.5rem;
+  background: var(--panel-bg);
+  border-radius: var(--border-radius);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 20px var(--panel-shadow);
+  overflow: hidden;
+}
+
+.InputImage, .OutputImage {
+  flex: 1 1 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: 100%;
+  overflow: hidden;
+  margin: 0.5rem;
+}
+
+.InputImage h2, .OutputImage h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: var(--accent-color);
+}
+
+/* Image styling with flair */
+.InputImage img, .OutputImage img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 15px var(--panel-shadow);
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.InputImage img:hover, .OutputImage img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 25px var(--panel-shadow);
+}
+
+/* ------------------------- */
+/* Footer                    */
+/* ------------------------- */
+.Footer {
+  height: var(--footer-height);
+  width: 100%;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--subtext-color);
+}
