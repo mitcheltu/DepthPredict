@@ -33,7 +33,10 @@ First Model:
         Scheduler: ReduceLROnPlateau (adjust learning rate on plateaued validation loss).
 
         5 epochs traing the head without using backbone.
-        25 epochs FineTuning with backbone
+        25 epochs FineTuning with backbone.
     
     Results:
-        ![first_model](doc_images/model1.jpg)
+![first_model](doc_images/model1.jpg)
+![second_model](doc_images/model2.jpg)
+![third_model](doc_images/model3.jpg)
+![fourth_model](doc_images/model4.jpg)
