@@ -104,7 +104,6 @@ body, html, #root {
   border-radius: var(--border-radius);
   backdrop-filter: blur(10px);
   box-shadow: 0 8px 20px var(--panel-shadow);
-  overflow: hidden;
 }
 
 .InputImage, .OutputImage {
@@ -115,6 +114,7 @@ body, html, #root {
   max-height: 100%;
   overflow: hidden;
   margin: 0.5rem;
+  cursor: crosshair;
 }
 
 .InputImage h2, .OutputImage h2 {
@@ -136,6 +136,16 @@ body, html, #root {
 .InputImage img:hover, .OutputImage img:hover {
   transform: scale(1.03);
   box-shadow: 0 6px 25px var(--panel-shadow);
+}
+
+.StatusDisplay {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  text-align: center;
+  background-color: var(--panel-bg);
+  border-radius: var(--border-radius);
+  width: 60%;
+  
 }
 
 /* ------------------------- */
