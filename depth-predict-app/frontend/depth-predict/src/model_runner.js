@@ -2,9 +2,12 @@ import * as ort from 'onnxruntime-web';
 
 ort.env.wasm.wasmPaths = process.env.NODE_ENV === 'production' 
   ? '/DepthPredict/onnx/' 
-  : '/onnx/';
+  : '/node_modules/onnxruntime-web/dist/';
 
 let session = null;
+const modelUrl = process.env.NODE_ENV === 'production' 
+  ? '/DepthPredict/depth_model.onnx' 
+  : '/depth_model.onnx';
 
 /**
  * Load the ONNX model (only once)
@@ -12,7 +15,7 @@ let session = null;
 export async function loadModel() {
   if (!session) {
     try {
-        session = await ort.InferenceSession.create('/DepthPredict/depth_model.onnx', {
+        session = await ort.InferenceSession.create(modelUrl, {
             executionProviders: ['wasm'], 
     });
     }
@@ -104,12 +107,12 @@ export async function depthToColoredBase64(depthArray, width, height, targetWidt
 
         if (value < 0.5) {
             // Red → Yellow
-             g = Math.floor(100 + 155 * (value / 0.5)); // interpolate G from 100 → 255
+             g = Math.floor(255 * (value / 0.5)); // interpolate G from 100 → 255
             b = 0;
         } else {
             // Yellow → White
             g = 255;
-            b = Math.floor(100 + 155 * ((value - 0.5) / 0.5)); // interpolate B from 100 → 255
+            b = Math.floor(75 + 180 * ((value - 0.5) / 0.5)); // interpolate B from 100 → 255
         }
 
         data[i * 4] = r;
