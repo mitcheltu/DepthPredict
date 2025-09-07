@@ -1,6 +1,8 @@
 import * as ort from 'onnxruntime-web';
 
-ort.env.wasm.wasmPaths = 'onnx/';
+ort.env.wasm.wasmPaths = process.env.NODE_ENV === 'production' 
+  ? '/DepthPredict/onnx/' 
+  : '/onnx/';
 
 let session = null;
 
