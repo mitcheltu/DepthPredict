@@ -10,6 +10,4 @@ export default defineConfig({
   mimeTypes: {
       'application/wasm': ['wasm']
     },
-    base: '/DepthPredict/',
-
 })
