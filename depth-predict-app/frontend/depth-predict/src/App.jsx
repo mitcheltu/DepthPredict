@@ -83,7 +83,9 @@ function App() {
           <h1>Depth Prediction</h1>
         </div>
         <div className="Description">
-          Predict depth from a single image using deep learning.
+          Predict depth from a single image using deep learning. 
+          <br/>
+          Take an indoor photo and see the estimated depth map! (Model trained on NYU Depth V2 dataset)
         </div>
         
         <div className="UploadDisplay">
