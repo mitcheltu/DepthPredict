@@ -7,4 +7,7 @@ const repoName = 'DepthPredict';
 export default defineConfig({
   plugins: [react()],
   base: process.env.NODE_ENV === 'production' ? `/${repoName}/` : '/',
+  mimeTypes: {
+      'application/wasm': ['wasm']
+    }
 })

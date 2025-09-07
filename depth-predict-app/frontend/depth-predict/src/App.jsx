@@ -1,17 +1,30 @@
 
 import './App.css'
 import placeHolderImage from './assets/Placeholder-_-Glossary.svg';
-
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { runModel, depthToColoredBase64, preprocessImage } from './model_runner';
 
 function App() {
+  
   const [selectedFile, setSelectedFile] = useState(null);
   const [inputImage, setInputImage] = useState(null);
   const [outputImage, setOutputImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const [modelLoaded, setModelLoaded] = useState(false);
   const [depthData, setDepthData] = useState(null);
+
   const [hoverValue, setHoverValue] = useState(null);
+
+
+
+    useEffect(() => {
+    // preload the model with dummy data
+    runModel(new Float32Array(3*256*256).fill(0)).then(() => setModelLoaded(true));
+  }, []);
+
+  
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -24,37 +37,32 @@ function App() {
   }
 
   const handleUpload = async () => {
-    if (!selectedFile) {
-      setError("Please select a file first.");
-      return;
+    if (!selectedFile) return;
+
+    // preprocess image here (resize, normalize)
+    const {float32Data, originalWidth, originalHeight} = await preprocessImage(selectedFile);
+    console.log({float32Data, originalWidth, originalHeight })
+    // run inference
+    const result = await runModel(float32Data);
+    const depthArray = result.depthArray;
+    console.log({depthArray})
+    const coloredBase64 = await depthToColoredBase64(depthArray, 256, 256, originalWidth, originalHeight);
+
+    // Convert depthArray (Float32Array) to 2D array for easier access
+    const depth2D = [];
+    for (let i = 0; i < 256; i++) {
+      depth2D.push(depthArray.slice(i * 256, (i + 1) * 256));
     }
-
-    const formData = new FormData();
-    formData.append("image", selectedFile);
-    
-    try {
-      const response = await fetch("http://localhost:5000/predict", {
-        method: "POST",
-        body: formData
-      });
-
-      if (!response.ok) {
-        throw new Error(`Server error: ${response.statusText}`);
-      }
-
-      const data = await response.json();
-      console.log(data);
-      setOutputImage(`data:image/png;base64,${data.depth_png}`);
-      setDepthData(data.depth_raw);
-      setError(null);
-    } catch (err) {
-      setError(`Upload failed: ${err.message}`);
-    } finally {
-      setLoading(false);
-    }
-  }
+    setOutputImage(coloredBase64);
+    setDepthData(depth2D);
+    setLoading(false);
+    setError(null);
+    setHoverValue(null);
+  };
 
   const handleMouseMove = (e) => {
+    console.log({depthData})
+    if (!depthData) return;
     const img = e.target;
     const rect = img.getBoundingClientRect();
 
