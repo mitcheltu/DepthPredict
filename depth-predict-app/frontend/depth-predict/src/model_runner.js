@@ -11,7 +11,7 @@ export async function loadModel() {
   if (!session) {
     try {
         session = await ort.InferenceSession.create('/depth_model.onnx', {
-            executionProviders: ['webgl', 'wasm'], 
+            executionProviders: ['wasm'], 
     });
     }
     catch (e) {
