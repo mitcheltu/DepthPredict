@@ -1,6 +1,6 @@
 import * as ort from 'onnxruntime-web';
 
-ort.env.wasm.wasmPaths = '/node_modules/onnxruntime-web/dist/';
+ort.env.wasm.wasmPaths = 'onnx/';
 
 let session = null;
 
