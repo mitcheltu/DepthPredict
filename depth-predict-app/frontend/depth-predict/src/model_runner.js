@@ -12,7 +12,7 @@ let session = null;
 export async function loadModel() {
   if (!session) {
     try {
-        session = await ort.InferenceSession.create('/depth_model.onnx', {
+        session = await ort.InferenceSession.create('/DepthPredict/depth_model.onnx', {
             executionProviders: ['wasm'], 
     });
     }
@@ -98,11 +98,24 @@ export async function depthToColoredBase64(depthArray, width, height, targetWidt
 
     for (let i = 0; i < width * height; i++) {
         let value = (depthArray[i] - min) * scale; // normalized
-        // Apply simple hot colormap: R=val, G=val*0.5, B=0
-        data[i * 4] = Math.floor(value * 255);       // R
-        data[i * 4 + 1] = Math.floor(value * 128);   // G
-        data[i * 4 + 2] = 0;                          // B
-        data[i * 4 + 3] = 255;                        // Alpha
+        let r = 255;
+        let g = 0;
+        let b = 0;
+
+        if (value < 0.5) {
+            // Red → Yellow
+            g = Math.floor(255 * (value / 0.5)); // interpolate G from 0 → 255
+            b = 0;
+        } else {
+            // Yellow → White
+            g = 255;
+            b = Math.floor(255 * ((value - 0.5) / 0.5)); // interpolate B from 0 → 255
+        }
+
+        data[i * 4] = r;
+        data[i * 4 + 1] = g;
+        data[i * 4 + 2] = b;
+        data[i * 4 + 3] = 255; // alpha
     }
 
     ctx.putImageData(imageData, 0, 0);
