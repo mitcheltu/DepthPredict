@@ -89,7 +89,8 @@ function App() {
         </div>
         
         <div className="UploadDisplay">
-
+          {!modelLoaded && <div className="Loading">Loading model...</div>}
+          {modelLoaded && <div className="ModelReady">Model loaded! Upload an indoor image to get started.</div>}
           <div className="Uploader">
             <input type="file" accept="image/*" onChange={handleFileChange}/>
             <button onClick={handleUpload}>Upload & Predict</button>
@@ -114,7 +115,7 @@ function App() {
         {error && <div className="Error">{error}</div>}
         {hoverValue === null && !loading && !error && (
           <div className="Instructions">
-            Click Upload and Predict! Hover over the images to see depth values at specific points.
+            Hover over the images to see depth values at specific points.
           </div>
         )}
         {hoverValue !== null && (
