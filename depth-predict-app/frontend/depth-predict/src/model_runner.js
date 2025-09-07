@@ -104,12 +104,12 @@ export async function depthToColoredBase64(depthArray, width, height, targetWidt
 
         if (value < 0.5) {
             // Red → Yellow
-            g = Math.floor(255 * (value / 0.5)); // interpolate G from 0 → 255
+             g = Math.floor(100 + 155 * (value / 0.5)); // interpolate G from 100 → 255
             b = 0;
         } else {
             // Yellow → White
             g = 255;
-            b = Math.floor(255 * ((value - 0.5) / 0.5)); // interpolate B from 0 → 255
+            b = Math.floor(100 + 155 * ((value - 0.5) / 0.5)); // interpolate B from 100 → 255
         }
 
         data[i * 4] = r;
