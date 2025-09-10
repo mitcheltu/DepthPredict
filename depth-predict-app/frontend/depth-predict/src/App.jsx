@@ -89,8 +89,8 @@ function App() {
         </div>
         
         <div className="UploadDisplay">
-          {!modelLoaded && <div className="Loading">Loading model...</div>}
-          {modelLoaded && <div className="ModelReady">Model loaded! Upload an indoor image to get started.</div>}
+          {!modelLoaded && <div className="Loading">⏳ Loading model...</div>}
+          {modelLoaded && <div className="ModelReady">🤗 Model loaded! Upload an indoor image to get started.</div>}
           <div className="Uploader">
             <input type="file" accept="image/*" onChange={handleFileChange}/>
             <button onClick={handleUpload}>Upload & Predict</button>

@@ -1,4 +1,4 @@
-This project implements a depth prediction model that estimates depth maps from RGB images using a pretrained EfficientNet backbone and a simple decoder. It supports data augmentation, EMA, and custom loss functions for robust training. Trained on NYU's Depth V2 for Indoor Color and Depth images.
+My project implements a depth prediction model that estimates depth maps from RGB images using a pretrained EfficientNet backbone and a simple decoder. It supports data augmentation, EMA, and custom loss functions for robust training. Trained on NYU's Depth V2 for Indoor Color and Depth images.
 
 Features Include: 
 RGB-to-depth prediction
