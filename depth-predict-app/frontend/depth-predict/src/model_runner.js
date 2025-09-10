@@ -105,14 +105,24 @@ export async function depthToColoredBase64(depthArray, width, height, targetWidt
         let g = 0;
         let b = 0;
 
-        if (value < 0.5) {
+        if (value < 0.33) {
+            // Black → Red
+            const t = value / 0.33;
+            r = Math.floor(255 * t);
+            g = 0;
+            b = 0;
+        } else if (value < 0.66) {
             // Red → Yellow
-             g = Math.floor(255 * (value / 0.5)); // interpolate G from 100 → 255
+            const t = (value - 0.33) / 0.33;
+            r = 255;
+            g = Math.floor(255 * t);
             b = 0;
         } else {
             // Yellow → White
+            const t = (value - 0.66) / 0.34;
+            r = 255;
             g = 255;
-            b = Math.floor(75 + 180 * ((value - 0.5) / 0.5)); // interpolate B from 100 → 255
+            b = Math.floor(255 * t);
         }
 
         data[i * 4] = r;
