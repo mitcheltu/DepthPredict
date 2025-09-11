@@ -77,4 +77,4 @@ Depth Prediction Model – Version 3 (✅ Best)
      - Post-processing ready (median + Gaussian smoothing), though disabled by default.
 
      Results:
-![seventh_model](doc_images/model7.jpg)
+![seventh_model](doc_images/depthmodel7.jpg)
