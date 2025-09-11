@@ -128,7 +128,7 @@ function App() {
         
         
         <div className="Footer">
-          Depth Prediction Web App - Mitchel Tu
+          Mitchel Tu → <a href="https://github.com/mitcheltu/DepthPredict"> Go to Git Repository</a>
         </div>
       </div>
     </>
